@@ -399,8 +399,8 @@ def train_placement(
 
         elif epoch > 4 * num_epochs / 5:
             for param_group in optimizer.param_groups:
-                param_group['lr'] = 0.1  # Low ending learning rate
-                lambda_overlap = 12
+                param_group['lr'] = 0.2  # Low ending learning rate
+                lambda_overlap = 2
         else:
             for param_group in optimizer.param_groups:
                 param_group['lr'] = 0.5
@@ -448,15 +448,15 @@ def train_placement(
             print(f"  Wirelength Loss: {wl_loss.item():.6f}")
             print(f"  Overlap Loss: {overlap_loss.item():.6f}")
 
-        # if epoch % 100 == 0 or epoch == num_epochs - 1:
-        #     filename = f"vis/{id_str}/placement_epoch_{epoch}_wl_{wl_loss.item():.4f}_ol_{overlap_loss.item():.4f}.png"
-        #     plot_placement(
-        #         initial_cell_features=initial_cell_features,
-        #         final_cell_features=cell_features_current,
-        #         pin_features=pin_features,
-        #         edge_list=edge_list,
-        #         filename=filename,
-        #     )
+        if epoch % 100 == 0 or epoch == num_epochs - 1:
+            filename = f"vis/{id_str}/placement_epoch_{epoch}_wl_{wl_loss.item():.4f}_ol_{overlap_loss.item():.4f}.png"
+            plot_placement(
+                initial_cell_features=initial_cell_features,
+                final_cell_features=cell_features_current,
+                pin_features=pin_features,
+                edge_list=edge_list,
+                filename=filename,
+            )
         
 
     # Create final cell features
