@@ -399,8 +399,8 @@ def train_placement(
 
         elif epoch > 4 * num_epochs / 5:
             for param_group in optimizer.param_groups:
-                param_group['lr'] = 0.2  # Low ending learning rate
-                lambda_overlap = 2
+                param_group['lr'] = 0.4  # Low ending learning rate
+                lambda_overlap = 1
         else:
             for param_group in optimizer.param_groups:
                 param_group['lr'] = 0.5
